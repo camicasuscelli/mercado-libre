@@ -11,7 +11,7 @@ export class ProductDetail extends Component {
 	}
 
 	async getProductDetails(){
-		const url = "http://localhost:9000/testAPI/items/"+ this.props.id;
+		const url = this.props.url+ this.props.id;
 		const response = await fetch(url);
 		//console.log(response);
 		const data = await response.json();

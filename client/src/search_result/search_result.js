@@ -25,7 +25,7 @@ export class SearchResult extends Component {
 	async callSearchApi(){
 		//if (this.state.searchquery){
 			//call api
-			const url = "http://localhost:9000/testAPI/items?q="+this.props.queryInfo; //"https://api.mercadolibre.com/sites/MLA/search?q=:query"
+			const url = this.props.url+this.props.queryInfo; //"https://api.mercadolibre.com/sites/MLA/search?q=:query"
       		const response = await fetch(url);
       		//console.log(response);
       		const responseData = await response.json();

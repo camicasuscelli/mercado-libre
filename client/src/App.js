@@ -17,7 +17,7 @@ function ProductDetailFunction(appCallback){
   console.log(state);
   return(
     <div>
-      <ProductDetail id = {state.id}/>
+      <ProductDetail id = {state.id} url="http://localhost:9000/testAPI/items/"/>
     </div>
   );
 }
@@ -25,19 +25,11 @@ function ProductDetailFunction(appCallback){
 function SearchResultFunction(appCallback) {
 
     const {search} = useLocation();
-    //console.log("searchResultFunction query:");
     const match = search.match(/search=(.*)/);
     const query = match?.[1];
-    //console.log(query);
-    ///const {id, pathname} = useLocation();
-    //console.log("camiprint testing id");
-    //console.log(id);
-//<SearchResult data = {this.state.searchResponse}/>
-  //console.log("SearchResultFunction");
-  //console.log(callback1);
     return (
         <div>
-            <SearchResult queryInfo={query} callback={appCallback}/>
+            <SearchResult queryInfo={query} callback={appCallback} url="http://localhost:9000/testAPI/items?q="/>
         </div>
     );
 }

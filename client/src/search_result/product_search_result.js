@@ -5,7 +5,7 @@ export class ProductSearchResult extends Component {
 
 	constructor(props){
 		super(props);
-		//console.log(this.props.data);
+		//console.log(this.props);
 		this.onClickProduct = this.onClickProduct.bind(this);
 		console.log("camiprint search result");
 	}
