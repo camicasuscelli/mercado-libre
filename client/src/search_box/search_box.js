@@ -1,4 +1,7 @@
 import React, {Component} from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import logo from '../images/mercadolibre.png';
 
 export class SearchBox extends Component {
 
@@ -9,16 +12,6 @@ export class SearchBox extends Component {
 	}
 
 	async handleSubmit(e){
-		//if (this.state.searchquery){
-		//	//call api
-		//	const url = "http://localhost:9000/testAPI/items?q="+this.state.searchquery; //"https://api.mercadolibre.com/sites/MLA/search?q=:query"
-      	//	const response = await fetch(url);
-      	//	//console.log(response);
-      	//	const data = await response.json();
-      	//	//TODO está imprimiendo antes de que devuelva el valor D:
-      	//	//console.log("cami" + response);
-      	//	this.props.callback(data);
-		//}
 		this.props.callback(this.state.searchquery);
 	}
 
@@ -26,23 +19,22 @@ export class SearchBox extends Component {
 		this.state.searchquery = e.target.value;
 	}
 	render(){
-		//action="http://localhost:9000/api/items" method="POST"
 		return(
 
-			<div style={{background: "yellow"}}>
-				<form >
-					<label>
-						<span> Simbolo ML </span>
-					</label>
+			<div style={{background: "gold", display: 'flex', justifyContent:'center', alignItems:'center'}}>
+				<form style={{width:"100%", height:"30%", display:'flex', justifyContent:'center', alignItems:'center'}}>
+					<img src={logo} width="5%" />
 					<input
 			            type="text"
 			            id="header-search"
 			            placeholder="Nunca dejes de buscar"
 			            name="query"
-			            style = {{width:700}}
-			            onChange = {this.onInputChange.bind(this)} 
+			            style = {{width:"30%"}}
+			            onChange = {this.onInputChange.bind(this)}
 			        />
-			        <button type="button" onClick={this.handleSubmit}>Search</button>
+			        <button type="button" onClick={this.handleSubmit}>
+								<FontAwesomeIcon icon={faSearch} />
+							</button>
 				</form>
 			</div>
 		);

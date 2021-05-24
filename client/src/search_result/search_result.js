@@ -13,26 +13,18 @@ export class SearchResult extends Component {
 
 	constructor(props){
 		super(props);
-		//this.state= {data: this.props.data, isProductDetail:false};
+
 		this.state={querySearch:this.props.query, data:""}
 		this.loadProductDetails = this.loadProductDetails.bind(this);
 
-		console.log("camitest");
-		console.log(this.props.query);
 		this.callSearchApi();
 	}
 
 	async callSearchApi(){
-		//if (this.state.searchquery){
-			//call api
-			const url = this.props.url+this.props.queryInfo; //"https://api.mercadolibre.com/sites/MLA/search?q=:query"
-      		const response = await fetch(url);
-      		//console.log(response);
-      		const responseData = await response.json();
-      		//TODO está imprimiendo antes de que devuelva el valor D:
-      		//console.log("cami" + response);
-      		//this.props.callback(data);
-		//}
+		const url = this.props.url+this.props.queryInfo; //"https://api.mercadolibre.com/sites/MLA/search?q=:query"
+		const response = await fetch(url);
+		const responseData = await response.json();
+
 		this.setState({data:responseData});
 	}
 
@@ -42,25 +34,18 @@ export class SearchResult extends Component {
 		console.log("loadProductDetails");
 		console.log(this.props);
 		this.props.callback(id);
-		//console.log("productdetail");
-		//
-      	//this.setState({isProductDetail: true, productDetail: response})
-		//console.log(this.state.productDetail);
-		//var example = 'MLA920592288';
-		//var url = '/items/' + example;
-    	//history.push(url);
 	}
 
 	render(){
 		if (this.state.data){
 			var testing = this.state.data.items.map((product) =>
-		        	<div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+		      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
 						<ProductSearchResult data = {product} callback = {this.loadProductDetails}/>
 					</div>
 		    	);
 			console.log(testing);
 			return (
-				<div>
+				<div style={{background:"lightgrey"}}>
 			   		{testing}
 			    </div>);
 		}else

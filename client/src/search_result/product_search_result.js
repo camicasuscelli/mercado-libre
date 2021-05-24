@@ -5,33 +5,23 @@ export class ProductSearchResult extends Component {
 
 	constructor(props){
 		super(props);
-		//console.log(this.props);
 		this.onClickProduct = this.onClickProduct.bind(this);
-		console.log("camiprint search result");
 	}
 
 	async onClickProduct(){
-		//call api
-		//console.log(this.props.data)
-		//const url = "http://localhost:9000/testAPI/items/"+ this.props.data.id;
-		//const response = await fetch(url);
-		//console.log(response);
-		//const data = await response.json();
-		//TODO está imprimiendo antes de que devuelva el valor D:
-		console.log("camiprint onclick");
-		//console.log(data);
+		console.log("Onclickproduct id:");
 		this.props.callback(this.props.data.id);
 	}
 
 	render(){
 		return(
-			<div onClick={this.onClickProduct} style={{background: "white", width:700, display: "flex"}}>
-				<img src={this.props.data.picture} alt="product image" width="300" height="300"/>
-				<div style={{width:500}}>
+			<div onClick={this.onClickProduct} style={{background: "white",margin:1, height:300, width:"50%", display: "flex"}}>
+				<img style={{margin:20}} src={this.props.data.picture} alt="product image" width="250" height="250"/>
+				<div style={{width:500, margin:30}}>
 					<p id="price">{this.props.data.price.amount}</p>
 					<p id="product-name">{this.props.data.title}</p>
 				</div>
-				<p id="location">{this.props.data.location}</p>
+				<p id="location" style={{margin:20}}>{this.props.data.location}</p>
 			</div>
 		);
 	}
