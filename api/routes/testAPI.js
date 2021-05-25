@@ -35,7 +35,10 @@ router.get('/items', function (req, res, next) {
   						"items":[]
   					}
   				for(var i=0; i<4; i++){
-
+						var priceFormatter = new Intl.NumberFormat(undefined, {
+						  style: 'currency',
+						  currency: results[i].currency_id,
+						});
   					var item =
   					{
 	  					"id":results[i].id,
@@ -43,7 +46,7 @@ router.get('/items', function (req, res, next) {
 	  					"price":
 	  					{
 	  						"currency":results[i].currency_id,
-	  						"amount":results[i].price,
+	  						"amount":priceFormatter.format(results[i].price),
 	  						"decimals":"0",
 	  					},
 	  					"picture":results[i].thumbnail,
@@ -73,8 +76,23 @@ router.get('/items/:id', function(req,res,next){
     }));
   }).then(function (data) {
     // Log the data to the console
-    console.log("camiprint uwu");
-    console.log(data);
+		var originalPrice = data[0].price;
+		var auxiliardecimal = originalPrice - Math.floor(originalPrice);
+		console.log(auxiliardecimal.toFixed(2));
+		var decimalPrice = 100* auxiliardecimal.toFixed(2);
+
+		//n - Math.floor(n)
+		var finalPrice = Math.trunc(originalPrice);
+		var priceFormatter = new Intl.NumberFormat(undefined, {
+			style: 'currency',
+			currency: data[0].currency_id,
+			minimumFractionDigits: 0
+		});
+		var remaining = priceFormatter.format(finalPrice); //slice(-2)
+
+		//var aux = remaining.slice(-2);
+		//console.log(aux);
+		//console.log(aux2);
     var response = {
         "author":{
           "name":"camila",
@@ -85,12 +103,12 @@ router.get('/items/:id', function(req,res,next){
           "title":data[0].title,
           "price":{
             "currency":data[0].currency_id,
-            "amount":data[0].price,
-            "decimals":0
+            "amount":remaining,
+            "decimals":decimalPrice
           },
           "picture":data[0].thumbnail,
           "condition":data[0].condition,
-          "free_shipping":"",
+          "free_shipping":data[0].shipping.free_shipping,
           "sold_quantity":data[0].sold_quantity,
           "description":data[1].plain_text
         }

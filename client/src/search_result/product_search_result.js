@@ -15,13 +15,13 @@ export class ProductSearchResult extends Component {
 
 	render(){
 		return(
-			<div onClick={this.onClickProduct} style={{background: "white",margin:1, height:300, width:"50%", display: "flex"}}>
+			<div onClick={this.onClickProduct} style={{background: "white",margin:1, height:300, width:800, display: "flex", justifyContent:'center'}}>
 				<img style={{margin:20}} src={this.props.data.picture} alt="product image" width="250" height="250"/>
-				<div style={{width:500, margin:30}}>
-					<p id="price">{this.props.data.price.amount}</p>
-					<p id="product-name">{this.props.data.title}</p>
+				<div style={{display:'flex','flex-direction':'column', width:300, margin:'30px 10px', 'align-items':'flex-start'}}>
+					<p id="price" style={{'font-size':20}}>{this.props.data.price.amount}</p>
+					<p id="product-name"style={{'font-size':16}}>{this.props.data.title}</p>
 				</div>
-				<p id="location" style={{margin:20}}>{this.props.data.location}</p>
+				<p id="location" style={{margin:'80px 20px', 'font-size':14, 'color':'dimgrey'}}>{this.props.data.location}</p>
 			</div>
 		);
 	}
