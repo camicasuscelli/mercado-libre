@@ -1,36 +1,33 @@
 import React, { Component } from "react";
 import { ProductSearchResult } from './product_search_result.js';
-import { ProductDetail } from '../product_detail/product_detail.js';
-import PropTypes from "prop-types";
-import { withRouter } from 'react-router-dom';
-import { createBrowserHistory } from "history";
-import { Route, Switch, Router } from 'react-router-dom';
-import { useLocation } from "react-router";
-
-const history = createBrowserHistory();
+import '../styles/mercadolibre_styles.css';
 
 export class SearchResult extends Component {
 
 	constructor(props){
 		super(props);
 
-		this.state={querySearch:this.props.query, data:""}
+		this.state={querySearch:this.props.query, data:"", message:"Buscando"}
 		this.loadProductDetails = this.loadProductDetails.bind(this);
 
 		this.callSearchApi();
 	}
 
 	async callSearchApi(){
-		const url = this.props.url+this.props.queryInfo; //"https://api.mercadolibre.com/sites/MLA/search?q=:query"
+		console.log("Search result - callSearchApi");
+		console.log(this.props.queryInfo);
+		const url = this.props.url+this.props.queryInfo;
 		const response = await fetch(url);
 		const responseData = await response.json();
-
-		this.setState({data:responseData});
+		console.log(response.status);
+		if(responseData.message){
+			this.setState({message:responseData.message})
+		}else{
+			this.setState({data:responseData});
+		}
 	}
 
 	loadProductDetails(id){
-		//we only have the id
-		//call callback to have the id and route back to it.
 		console.log("loadProductDetails");
 		console.log(this.props);
 		this.props.callback(id);
@@ -39,72 +36,20 @@ export class SearchResult extends Component {
 	render(){
 		if (this.state.data){
 			var testing = this.state.data.items.map((product) =>
-		      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+		      <div class="horizontal-align">
 						<ProductSearchResult data = {product} callback = {this.loadProductDetails}/>
 					</div>
 		    	);
 			console.log(testing);
 			return (
-				<div style={{background:"lightgrey"}}>
+				<div class="lightgrey-background">
 			   		{testing}
 			    </div>);
 		}else
 		{
 			return(
-				<div>Buscando</div>
+				<div>{this.state.message}</div>
 			);
 		}
 	}
-	//render(){
-	//	if (this.state.data && !this.state.isProductDetail){
-	//		var testing = this.state.data.items.map((product) =>
-	//		        	<div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-	//						<ProductSearchResult data = {product} callback = {this.loadProductDetails}/>
-	//					</div>
-	//		    	);
-	//	}
-	//	return(
-	//	<div className="wrapper">
-    //    	<Router history={history}>
-    //    	  <Switch>
-    //    	    <Route path="/">
-	//		    	<div>
-	//			   		{testing}
-	//			    </div>;
-    //    	    </Route>
-    //    	    <Route path="/:id">
-    //    	    	<ProductDetail data = {this.state.productDetail}/>
-    //    	    </Route>
-    //    	  </Switch>
-    //    	</Router>
-    //  </div>
-    //  );
-	//}
-	////if (this.state.data) {
-	//		if(this.state.isProductDetail){
-	//			return (
-	//				<div>
-	//					<ProductDetail data = {this.state.productDetail}/>
-	//				</div>
-	//			);
-	//		}else{
-	//			console.log("camprint");
-	//			//console.log(this.state.data.items);
-	//			var testing = this.state.data.items.map((product) =>
-	//	        	<div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-	//					<ProductSearchResult data = {product} callback = {this.loadProductDetails}/>
-	//				</div>
-	//	    	);
-//
-	//			console.log(testing);
-	//			return (
-	//				<div>
-	//			   		{testing}
-	//			    </div>);
-	//		}
-	//	}
-	//	else{
-	//		return(
-	//			<div>hola</div>);
-	//	}
 }

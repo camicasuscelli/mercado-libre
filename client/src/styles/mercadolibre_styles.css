@@ -1,0 +1,71 @@
+.horizontal-align{
+  display: flex;
+  justify-content:center;
+}
+
+.vertical-align{
+  display: flex;
+  flex-direction: column;
+}
+
+.start{
+  align-items:flex-start;
+}
+
+.center{
+  align-items:center;
+}
+
+.lightgrey-background{
+  background: lightgrey;
+}
+
+.white-background{
+  background: white;
+}
+
+.white-container-margin{
+  margin: 50px 0px 50px 0px;
+}
+
+.white-container-width{
+  width:1000px;
+}
+
+.yellow-background{
+  background: gold;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.logo-width{
+  width:5%;
+}
+
+.product-width{
+  width:700px;
+}
+
+.small-image-size{
+  width:600px;
+  height:600px;
+}
+
+.search-input-width{
+  width:30%;
+}
+
+.dodgerblue{
+  background:dodgerblue;
+}
+
+.buy-button{
+  border:none;
+  color:white;
+  padding:15px 70px;
+  margin-top:20;
+  font-size:20;
+  border-radius: 5;
+}

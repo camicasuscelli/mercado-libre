@@ -34,7 +34,16 @@ router.get('/items', function (req, res, next) {
   						"categories":[],
   						"items":[]
   					}
-  				for(var i=0; i<4; i++){
+					var resultLength = Object.keys(results).length;
+					if (resultLength > 4){
+						resultLength = 4;
+					}else if(resultLength==0){
+						result.message="No se encontraron resultados";
+						res.status(200).send(result);
+						return;
+					}
+
+  				for(var i=0; i<resultLength; i++){
 						var priceFormatter = new Intl.NumberFormat(undefined, {
 						  style: 'currency',
 						  currency: results[i].currency_id,
@@ -57,7 +66,7 @@ router.get('/items', function (req, res, next) {
 	  				result.items.push(item);
             console.log(results[i].title);
   				}
-  				res.send(result)
+  				res.status(200).send(result)
   			})
   		});
 	})
@@ -81,7 +90,6 @@ router.get('/items/:id', function(req,res,next){
 		console.log(auxiliardecimal.toFixed(2));
 		var decimalPrice = 100* auxiliardecimal.toFixed(2);
 
-		//n - Math.floor(n)
 		var finalPrice = Math.trunc(originalPrice);
 		var priceFormatter = new Intl.NumberFormat(undefined, {
 			style: 'currency',
