@@ -66,6 +66,7 @@ router.get('/items', function (req, res, next) {
 	  				result.items.push(item);
             console.log(results[i].title);
   				}
+					result.categories = results[0].tags;
   				res.status(200).send(result)
   			})
   		});
@@ -98,9 +99,6 @@ router.get('/items/:id', function(req,res,next){
 		});
 		var remaining = priceFormatter.format(finalPrice); //slice(-2)
 
-		//var aux = remaining.slice(-2);
-		//console.log(aux);
-		//console.log(aux2);
     var response = {
         "author":{
           "name":"camila",
@@ -118,7 +116,8 @@ router.get('/items/:id', function(req,res,next){
           "condition":data[0].condition,
           "free_shipping":data[0].shipping.free_shipping,
           "sold_quantity":data[0].sold_quantity,
-          "description":data[1].plain_text
+          "description":data[1].plain_text,
+					"categories":data[0].tags
         }
     }
     res.send(response);

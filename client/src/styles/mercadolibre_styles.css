@@ -25,7 +25,7 @@
 }
 
 .white-container-margin{
-  margin: 50px 0px 50px 0px;
+  margin: 10px 0px 30px 0px;
 }
 
 .white-container-width{
@@ -68,4 +68,8 @@
   margin-top:20;
   font-size:20;
   border-radius: 5;
+}
+.dim-grey-small-font{
+  font-size:14;
+  color:dimgrey;
 }

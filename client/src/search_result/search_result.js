@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ProductSearchResult } from './product_search_result.js';
+import { Breadcrumb } from '../breadcrumb/breadcrumb.js'
 import '../styles/mercadolibre_styles.css';
 
 export class SearchResult extends Component {
@@ -9,11 +10,9 @@ export class SearchResult extends Component {
 
 		this.state={querySearch:this.props.query, data:"", message:"Buscando"}
 		this.loadProductDetails = this.loadProductDetails.bind(this);
-
-		this.callSearchApi();
 	}
 
-	async callSearchApi(){
+	async componentDidMount(){
 		console.log("Search result - callSearchApi");
 		console.log(this.props.queryInfo);
 		const url = this.props.url+this.props.queryInfo;
@@ -35,16 +34,19 @@ export class SearchResult extends Component {
 
 	render(){
 		if (this.state.data){
-			var testing = this.state.data.items.map((product) =>
-		      <div class="horizontal-align">
+			var items = this.state.data.items.map((product, index) =>
+		      <div key={index} className="horizontal-align">
 						<ProductSearchResult data = {product} callback = {this.loadProductDetails}/>
 					</div>
 		    	);
-			console.log(testing);
+			console.log(items);
 			return (
-				<div class="lightgrey-background">
-			   		{testing}
-			    </div>);
+				<div>
+					<Breadcrumb categories={this.state.data.categories}/>
+					<div className="lightgrey-background" style={{padding:"10px 0px 30px 0px"}}>
+						{items}
+					</div>
+			  </div>);
 		}else
 		{
 			return(

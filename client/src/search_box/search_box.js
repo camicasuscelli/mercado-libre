@@ -15,7 +15,9 @@ export class SearchBox extends Component {
 	async handleSubmit(e){
 		console.log("Search box - handleSubmit()");
 		console.log(this.state.searchquery);
-		this.props.callback(this.state.searchquery);
+		if(this.state.searchquery!==''){
+			this.props.callback(this.state.searchquery);
+		}
 	}
 
 	onInputChange(e){
@@ -25,15 +27,15 @@ export class SearchBox extends Component {
 	render(){
 		return(
 
-			<div class="horizontal-align center yellow-background">
-				<form class="horizontal-align center full-width">
-					<img class="logo-width" src={logo} alt="mercado libre" />
+			<div className="horizontal-align center yellow-background">
+				<form className="horizontal-align center full-width">
+					<img className="logo-width" src={logo} alt="mercado libre" />
 					<input
 			            type="text"
 			            id="header-search"
 			            placeholder="Nunca dejes de buscar"
 			            name="query"
-			            class = "search-input-width"
+			            className = "search-input-width"
 			            onChange = {this.onInputChange.bind(this)}
 			        />
 			        <button type="button" onClick={this.handleSubmit}>
